@@ -17,7 +17,41 @@ model User {
   username  String   @unique
   hash      String
 
-  firsrName String?
+  firstName String?
+  Comment   Comment[]
+  Post      Post[]
 
   @@map("users")
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  text      String
+  likes     Int?
+  retweet   Int?
+  comment   Comment[]
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@map("posts")
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  text      String
+  likes     Int?
+  retweet   Int?
+
+  firsrName String?
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  postId    Int?
+  Post      Post?     @relation(fields: [postId], references: [id])
+  children  Comment[] @relation("children")
+  parentId  Int?      @map("commentId")
+  parent    Comment?  @relation("children", fields: [parentId], references: [id])
+
+  @@map("comments")
 }

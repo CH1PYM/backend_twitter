@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "comments" ALTER COLUMN "likes" DROP NOT NULL,
+ALTER COLUMN "retweet" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "posts" ALTER COLUMN "likes" DROP NOT NULL,
+ALTER COLUMN "retweet" DROP NOT NULL;
