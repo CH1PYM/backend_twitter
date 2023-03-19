@@ -18,4 +18,13 @@ export class UserService {
       throw error;
     }
   }
+  async getStrangeProfile(id: number) {
+    try {
+      const userProfile = await this.prisma.user.findUnique({
+        where: { id },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
