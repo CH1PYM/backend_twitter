@@ -31,7 +31,7 @@ export class PostController {
   ) {
     return this.postService.deletePost(user, id);
   }
-  @UseGuards(JwtAuthGuard)
+  /*@UseGuards(JwtAuthGuard)*/
   @Get('get/:pageNumber')
   getPost(
     @GetUser() user,

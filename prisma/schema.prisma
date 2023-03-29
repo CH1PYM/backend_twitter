@@ -17,9 +17,12 @@ model User {
   username  String   @unique
   hash      String
 
-  firstName String?
-  Comment   Comment[]
-  Post      Post[]
+  firstName     String?
+  lastName      String?
+  profileImg    String?
+  backgroundImg String?
+  Comment       Comment[]
+  Post          Post[]
 
   @@map("users")
 }
@@ -29,6 +32,7 @@ model Post {
   createdAt DateTime  @default(now())
   text      String
   likes     Int?
+  img       String?
   retweet   Int?
   comment   Comment[]
   userId    Int
@@ -43,15 +47,15 @@ model Comment {
   text      String
   likes     Int?
   retweet   Int?
+  img       String?
 
-  firsrName String?
-  userId    Int
-  user      User      @relation(fields: [userId], references: [id])
-  postId    Int?
-  Post      Post?     @relation(fields: [postId], references: [id])
-  children  Comment[] @relation("children")
-  parentId  Int?      @map("commentId")
-  parent    Comment?  @relation("children", fields: [parentId], references: [id])
+  userId   Int
+  user     User      @relation(fields: [userId], references: [id])
+  postId   Int?
+  Post     Post?     @relation(fields: [postId], references: [id])
+  children Comment[] @relation("children")
+  parentId Int?      @map("commentId")
+  parent   Comment?  @relation("children", fields: [parentId], references: [id])
 
   @@map("comments")
 }
